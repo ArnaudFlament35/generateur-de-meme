@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Générateur de Meme</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <header class="app-header">
+        <h1 class="app-title">Générateur de Meme</h1>
+      </header>
+
+      <main class="app-main">
+        <div class="main-grid">
+          <!-- Galerie de templates -->
+          <section class="gallery-section">
+            <div class="section-header">
+              <h2 class="section-title">Templates</h2>
+              <label for="image-upload" class="upload-button">
+                <span>Upload</span>
+                <input type="file" id="image-upload" accept="image/*" hidden />
+              </label>
+            </div>
+            <div class="gallery-grid" id="gallery-grid">
+              <!-- Les templates seront chargés dynamiquement -->
+            </div>
+          </section>
+
+          <!-- Contrôles -->
+          <aside class="controls-panel">
+            <section class="control-card">
+              <div class="card-header">
+                <h2 class="card-title">Textes</h2>
+                <button id="add-text-btn" class="icon-button" title="Ajouter un texte">
+                  <span>+</span>
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-label">Texte sélectionné</label>
+                  <div id="texts-list" class="texts-list">
+                    <!-- La liste des textes sera générée dynamiquement -->
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <textarea
+                    id="text-input"
+                    class="form-textarea"
+                    placeholder="Entrez votre texte..."
+                    rows="2"
+                  ></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="text-size" class="form-label">
+                    Taille:
+                    <span class="value-display" id="size-value">40</span>px
+                  </label>
+                  <div class="slider-wrapper">
+                    <input
+                      type="range"
+                      id="text-size"
+                      class="form-slider"
+                      min="20"
+                      max="100"
+                      value="40"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="text-color" class="form-label">Couleur</label>
+                  <div class="color-input-wrapper">
+                    <input
+                      type="color"
+                      id="text-color"
+                      class="color-input"
+                      value="#FFFFFF"
+                    />
+                    <span class="color-hex" id="color-value">#FFFFFF</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Position</label>
+                  <div class="button-group">
+                    <button class="group-button" data-position="top">
+                      <span>Haut</span>
+                    </button>
+                    <button class="group-button active" data-position="center">
+                      <span>Centre</span>
+                    </button>
+                    <button class="group-button" data-position="bottom">
+                      <span>Bas</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="text-rotation" class="form-label">
+                    Rotation:
+                    <span class="value-display" id="rotation-value">0</span>°
+                  </label>
+                  <div class="slider-wrapper">
+                    <input
+                      type="range"
+                      id="text-rotation"
+                      class="form-slider"
+                      min="-180"
+                      max="180"
+                      value="0"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button id="delete-text-btn" class="delete-button" disabled>
+                    <span>Supprimer ce texte</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <div class="action-section">
+              <button id="download-btn" class="action-button" disabled>
+                <span>Télécharger</span>
+              </button>
+            </div>
+          </aside>
+
+          <!-- Aperçu -->
+          <section class="preview-panel">
+            <div class="preview-container">
+              <div class="canvas-wrapper">
+                <canvas id="meme-canvas"></canvas>
+                <div class="preview-placeholder" id="canvas-placeholder">
+                  <div class="placeholder-icon">🖼️</div>
+                  <p class="placeholder-text">Sélectionnez un template</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
