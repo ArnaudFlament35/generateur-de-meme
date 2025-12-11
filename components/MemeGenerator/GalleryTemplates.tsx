@@ -11,6 +11,7 @@ const TEMPLATE_IMAGES = [
   '/templates/all_well.jpg',
   '/templates/clever.jpg',
   '/templates/made_it.jpg',
+  '/templates/disaster_girl.webp',
 ];
 
 export default function GalleryTemplates({ onImageSelect }: GalleryTemplatesProps) {
