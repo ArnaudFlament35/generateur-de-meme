@@ -1,69 +1,76 @@
-# 🎭 Générateur de Meme
+# Générateur de Memes - Application Next.js avec InstantDB
 
-Application web simple et moderne pour créer des memes personnalisés.
+Application fullstack permettant aux utilisateurs de créer, publier et voter pour des memes.
 
 ## Fonctionnalités
 
-- ✅ **Upload d'images** : Téléchargez votre propre image comme template
-- ✅ **Galerie de templates** : Sélectionnez parmi une collection de templates prédéfinis
-- ✅ **Texte personnalisable** : Ajoutez du texte avec taille ajustable
-- ✅ **Style de texte** : Texte blanc avec bordures noires pour une meilleure lisibilité
-- ✅ **Positionnement** : Placez le texte en haut, au centre ou en bas
-- ✅ **Téléchargement** : Téléchargez votre meme en haute qualité (PNG)
+- **Générateur de memes** : Créez des memes avec des templates ou vos propres images
+- **Publication** : Publiez vos memes dans la galerie publique
+- **Système de vote** : Votez pour vos memes préférés (un vote par utilisateur par meme)
+- **Authentification** : Système d'inscription et de connexion avec InstantDB
+- **Galerie publique** : Parcourez tous les memes publiés, triés par nombre de votes
 
-## Utilisation
+## Technologies
 
-1. Ouvrez `index.html` dans votre navigateur web
-2. Choisissez une image :
-   - **Onglet Upload** : Téléchargez votre propre image
-   - **Onglet Galerie** : Sélectionnez un template prédéfini
-3. Ajoutez votre texte dans la zone de texte
-4. Ajustez la taille du texte avec le slider
-5. Choisissez la position du texte (haut/centre/bas)
-6. Cliquez sur "Télécharger le meme" pour sauvegarder votre création
+- **Next.js 14** : Framework React avec App Router
+- **TypeScript** : Typage statique
+- **InstantDB** : Base de données temps réel
+- **React** : Bibliothèque UI
+
+## Installation
+
+1. Installer les dépendances :
+```bash
+npm install
+```
+
+2. Configurer les variables d'environnement :
+Créez un fichier `.env.local` à la racine du projet :
+```
+NEXT_PUBLIC_INSTANTDB_APP_ID=8df3dccd-a945-4d8f-8ace-161a00ae419b
+```
+
+3. Lancer le serveur de développement :
+```bash
+npm run dev
+```
+
+4. Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur
 
 ## Structure du projet
 
 ```
 cursor_video/
-├── index.html          # Structure HTML principale
-├── styles.css          # Styles CSS
-├── script.js           # Logique JavaScript
-├── templates/          # Dossier pour les images templates
-│   └── README.md       # Instructions pour ajouter des templates
-└── README.md           # Ce fichier
+├── app/                    # Pages Next.js (App Router)
+│   ├── layout.tsx         # Layout principal avec InstantDB Provider
+│   ├── page.tsx           # Page d'accueil (Galerie)
+│   ├── create/            # Page générateur de memes
+│   ├── login/             # Page authentification
+│   └── api/               # API routes
+├── components/            # Composants React
+│   ├── MemeGenerator/    # Composants du générateur
+│   ├── MemeGallery/       # Composants de la galerie
+│   ├── Auth/             # Composants d'authentification
+│   └── Layout/           # Composants de layout
+├── lib/                  # Utilitaires et configuration
+│   ├── instantdb.ts      # Configuration InstantDB
+│   └── utils.ts         # Utilitaires (canvas, base64)
+├── styles/               # Styles CSS globaux
+│   └── globals.css
+└── public/               # Fichiers statiques
+    └── templates/        # Templates de memes
 ```
 
-## Ajouter des templates à la galerie
+## Utilisation
 
-1. Ajoutez vos images dans le dossier `templates/`
-2. Modifiez `script.js` et ajoutez les chemins dans le tableau `templateImages` de la fonction `loadGalleryTemplates()`
-
-Exemple :
-```javascript
-const templateImages = [
-    'templates/template1.jpg',
-    'templates/template2.png'
-];
-```
-
-## Technologies utilisées
-
-- HTML5
-- CSS3 (avec Grid et Flexbox)
-- JavaScript vanilla
-- Canvas API pour le rendu et l'export
-
-## Compatibilité
-
-L'application fonctionne sur tous les navigateurs modernes supportant :
-- Canvas API
-- FileReader API
-- ES6+
+1. **Créer un compte** : Cliquez sur "Se connecter" puis "S'inscrire"
+2. **Créer un meme** : Allez sur "Créer un meme", sélectionnez un template ou uploadez une image
+3. **Ajouter du texte** : Utilisez les contrôles pour ajouter, modifier et positionner du texte
+4. **Publier** : Cliquez sur "Publier" pour partager votre meme
+5. **Voter** : Dans la galerie, cliquez sur le bouton de vote pour voter pour un meme
 
 ## Notes
 
-- Les images téléchargées sont exportées en PNG haute qualité
-- Le texte supporte les retours à la ligne (appuyez sur Entrée)
-- La taille du texte peut être ajustée de 20px à 100px
-
+- Les images sont stockées en base64 dans InstantDB
+- Un utilisateur ne peut voter qu'une seule fois par meme
+- La galerie affiche les memes triés par nombre de votes décroissant
